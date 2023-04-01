@@ -23,10 +23,12 @@ export default {
 
       let urlApi = 'https://api.themoviedb.org/3/search/movie?api_key=2d6841a37fd674dfe6e37d212e5b383a&language=it-IT&query=';
 
-        urlApi += store.input;
-        console.log(urlApi)
 
 
+        console.log("è entrato nel IF")
+        urlApi += store.input.replace(" ", "+")
+
+      console.log(urlApi.length);
 
       axios.get(urlApi)
         .then(response => {
@@ -40,8 +42,7 @@ export default {
 </script>
 
 <template>
-  <h1 class="text-center">H1 in app</h1>
-  <MyHeader @cercaFilm="getFilm"/>
+  <MyHeader @cercaFilm="getFilm" />
   <MyMain></MyMain>
 </template>
 

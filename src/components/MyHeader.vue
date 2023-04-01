@@ -17,11 +17,14 @@ export default {
 </script>
 
 <template>
-   <h1>H1 in MyHeader</h1>
-   <div class="input-group">
-      <input type="text" placeholder="Cerca..." v-model="store.input" @keyup.enter="$emit('cercaFilm')">
-      <button @click="$emit('cercaFilm')">Cerca</button>
-   </div>
+   <div class="bg-danger">
+      <div class="container p-5">
+         <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Cerca..." aria-label="Cerca..." aria-describedby="button-addon2" v-model="store.input" @keyup.enter="$emit('cercaFilm')">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="$emit('cercaFilm')">Cerca</button>
+         </div>
+      </div>
+   </div>   
 </template>
 
 <style lang="scss" scoped>
