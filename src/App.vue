@@ -22,20 +22,35 @@ export default {
     getFilm() {
 
       let urlApi = 'https://api.themoviedb.org/3/search/movie?api_key=2d6841a37fd674dfe6e37d212e5b383a&language=it-IT&query=';
+      urlApi += store.input.replace(" ", "+")
 
+      axios.get(urlApi).then(response => {
+        this.store.filmListApi = response.data.results;
+      });
 
+      let urlApiTv = 'https://api.themoviedb.org/3/search/tv?api_key=2d6841a37fd674dfe6e37d212e5b383a&language=it_IT&query='
+      urlApiTv += store.input.replace(" ", "+")
 
-        console.log("è entrato nel IF")
-        urlApi += store.input.replace(" ", "+")
-
-      console.log(urlApi.length);
-
-      axios.get(urlApi)
-        .then(response => {
-          this.store.filmListApi = response.data;
-          console.log(this.store.filmListApi)
+      axios.get(urlApiTv).then(response => {
+        this.store.tvListApi = response.data.results;
         });
+      // console.log("ciaone")
+      // console.log(store.filmListApi)
     },
+    // getTv() {
+    //   console.log("ciaone")
+
+    // let urlApiTv = 'https://api.themoviedb.org/3/search/tv?api_key=2d6841a37fd674dfe6e37d212e5b383a&language=it_IT&query='
+    // urlApiTv += store.input.replace(" ", "+")
+
+    // axios.get(urlApiTv).then(response => {
+    //   this.store.tvListApi = response.data.results;
+    // });
+
+
+    // // console.log("ciaone")
+    // // console.log(store.filmListApi)
+    // }
   }
 }
 

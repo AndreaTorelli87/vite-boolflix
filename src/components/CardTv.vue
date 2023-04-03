@@ -1,10 +1,10 @@
 <script>
 export default {
-   name: "CardFilm",
+   name: "CardTv",
    props: {
       image: String,
-      title: String,
-      originalTitle: String,
+      name: String,
+      originalName: String,
       language: String,
       vote: Number,
       overview: String
@@ -46,14 +46,14 @@ export default {
       <div class="flip-card-inner h-100 w-100 position-relative">
          <div class="flip-card-front h-100 w-100 position-absolute bg-warning">
             <div v-if="image == null" class="text-center">
-               <h2 class="text-center p-3 fw-bold"> {{ title.toUpperCase() }} </h2>
+               <h2 class="text-center p-3 fw-bold"> {{ name.toUpperCase() }} </h2>
                <span>Locandina non trovata</span>
             </div>
-            <img :src="`https://image.tmdb.org/t/p/w342${image}`" :alt="title" class="w-100 h-100" v-else>
+            <img :src="`https://image.tmdb.org/t/p/w342${image}`" :alt="name" class="w-100 h-100" v-else>
          </div>
          <div class="flip-card-back h-100 w-100 position-absolute bg-black text-white overflow-scroll text-center p-2">
-            <h4 class="fw-bold">{{ title }}</h4>
-            <h5 v-if="title != originalTitle" class="text-warning">{{ originalTitle }}</h5>
+            <h4 class="fw-bold">{{ name }}</h4>
+            <h5 v-if="name != originalName" class="text-warning">{{ originalName }}</h5>
             <img 
                :src="flag(language)"
                :alt="`Lingua: ${language}`" 
