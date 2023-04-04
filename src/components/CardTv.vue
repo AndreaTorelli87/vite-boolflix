@@ -10,32 +10,25 @@ export default {
       overview: String
    }, methods: {
       flag(lingua) {
-
-         if(lingua == "EN"){
-            lingua = "GB"
-         } else if(lingua == "JA"){
-            lingua = "JP"
-         } else if(lingua == "KO"){
-            lingua = "KR"
-         } else if(lingua == "ZH"){
-            lingua = "CN"
-         } else if(lingua == "HI"){
-            lingua = "IN"
-         } else if(lingua == "FA"){
-            lingua = "IR"
-         } else if(lingua == "TA"){
-            lingua = "IN"
-         } else if(lingua == "UR"){
-            lingua = "PK"
-         } else if(lingua == "TE"){
-            lingua = "IN"
-         } else if(lingua == "CS"){
-            lingua = "CZ"
-         } else if(lingua == "JV"){
-            lingua = "ID"
-         }
-
+         let converti= [];
+         converti["EN"] = "GB";
+         converti["JA"] = "JP";
+         converti["KO"] = "KR";
+         converti["ZH"] = "CN";
+         converti["HI"] = "IN";
+         converti["FA"] = "IR";
+         converti["TA"] = "IN";
+         converti["UR"] = "PK";
+         converti["TE"] = "IN";
+         converti["CS"] = "CZ";
+         converti["JV"] = "ID";
+         converti["DA"] = "DK";
+         converti["EL"] = "GR";
+         lingua = converti[lingua]!="" ? lingua : converti[lingua];
          return `https://flagsapi.com/${lingua}/flat/48.png`
+      },
+      votoStelle(voto){
+         return voto*10; 
       }
    }
 }
@@ -58,7 +51,11 @@ export default {
                :src="flag(language)"
                :alt="`Lingua: ${language}`" 
                />
-            <p>Voto: {{ vote }}</p>
+            <!-- <p>Voto: {{ vote }}</p> -->
+            <div class="stars-outer fs-3">
+               <div class="stars-inner fs-3" :style="width: votoStelle(vote)"></div>
+            </div>
+            <!-- <h1>{{ votoStelle(vote) }}</h1> -->
             <p>{{ overview }}</p>
          </div>
       </div>
@@ -68,19 +65,41 @@ export default {
 <style lang="scss" scoped>
 @use '../styles/general.scss';
 
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  content: "\2605 \2605 \2605 \2605 \2605";
+  &:before {
+}
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+//   width: 55%;
+
+  &::before {
+  content: "\2606 \2606 \2606 \2606 \2606";
+  color: #f8ce0b;
+}
+}
+
 .flip-card {
    width: 332px;
    height: 503px;
    perspective: 1000px;
 }
 .flip-card-inner {
-   transition: transform 0.8s;
+   transition: transform 0.3s;
    transform-style: preserve-3d;
 }
 .flip-card-front, .flip-card-back {
    backface-visibility: hidden;
 }
 .flip-card:hover .flip-card-inner, .flip-card-back {
-   transform: rotateX(540deg);
+   transform: rotateX(180deg);
 }
 </style>

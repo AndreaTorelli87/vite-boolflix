@@ -33,6 +33,10 @@ export default {
             lingua = "CZ"
          } else if(lingua == "JV"){
             lingua = "ID"
+         } else if(lingua == "DA"){
+            lingua = "DK"
+         } else if(lingua == "EL"){
+            lingua = "GR"
          }
 
          return `https://flagsapi.com/${lingua}/flat/48.png`
@@ -74,13 +78,13 @@ export default {
    perspective: 1000px;
 }
 .flip-card-inner {
-   transition: transform 0.8s;
+   transition: transform 0.3s;
    transform-style: preserve-3d;
 }
 .flip-card-front, .flip-card-back {
    backface-visibility: hidden;
 }
 .flip-card:hover .flip-card-inner, .flip-card-back {
-   transform: rotateX(540deg);
+   transform: rotateX(180deg);
 }
 </style>

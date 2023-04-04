@@ -49,7 +49,7 @@ export default {
       <div class="row">
          <h2>SERIE TV!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
          <div class="col-3" v-for="(card, index) in store.tvListApi" :key="index">
-            <CardFilm
+            <CardTv
                :image="card.poster_path"
                :name="card.name"
                :originalName="card.original_name"
