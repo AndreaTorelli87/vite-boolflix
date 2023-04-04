@@ -10,36 +10,26 @@ export default {
       overview: String
    }, methods: {
       flag(lingua) {
-
-         if(lingua == "EN"){
-            lingua = "GB"
-         } else if(lingua == "JA"){
-            lingua = "JP"
-         } else if(lingua == "KO"){
-            lingua = "KR"
-         } else if(lingua == "ZH"){
-            lingua = "CN"
-         } else if(lingua == "HI"){
-            lingua = "IN"
-         } else if(lingua == "FA"){
-            lingua = "IR"
-         } else if(lingua == "TA"){
-            lingua = "IN"
-         } else if(lingua == "UR"){
-            lingua = "PK"
-         } else if(lingua == "TE"){
-            lingua = "IN"
-         } else if(lingua == "CS"){
-            lingua = "CZ"
-         } else if(lingua == "JV"){
-            lingua = "ID"
-         } else if(lingua == "DA"){
-            lingua = "DK"
-         } else if(lingua == "EL"){
-            lingua = "GR"
-         }
-
+         let converti = [];
+         converti["EN"] = "GB";
+         converti["JA"] = "JP";
+         converti["KO"] = "KR";
+         converti["ZH"] = "CN";
+         converti["HI"] = "IN";
+         converti["FA"] = "IR";
+         converti["TA"] = "IN";
+         converti["UR"] = "PK";
+         converti["TE"] = "IN";
+         converti["CS"] = "CZ";
+         converti["JV"] = "ID";
+         converti["DA"] = "DK";
+         converti["EL"] = "GR";
+         converti["HE"] = "IL";
+         lingua = converti[lingua] == undefined ? lingua : converti[lingua];
          return `https://flagsapi.com/${lingua}/flat/48.png`
+      },
+      votoStelle(voto) {
+         return Math.round(voto * 10);
       }
    }
 }
@@ -49,8 +39,8 @@ export default {
    <div class="flip-card">
       <div class="flip-card-inner h-100 w-100 position-relative">
          <div class="flip-card-front h-100 w-100 position-absolute bg-warning">
-            <div v-if="image == null" class="text-center">
-               <h2 class="text-center p-3 fw-bold"> {{ title.toUpperCase() }} </h2>
+            <div v-if="image == null" class="text-center pt-5">
+               <h2 class="text-center p-2 fw-bold"> {{ title.toUpperCase() }} </h2>
                <span>Locandina non trovata</span>
             </div>
             <img :src="`https://image.tmdb.org/t/p/w342${image}`" :alt="title" class="w-100 h-100" v-else>
@@ -58,11 +48,12 @@ export default {
          <div class="flip-card-back h-100 w-100 position-absolute bg-black text-white overflow-scroll text-center p-2">
             <h4 class="fw-bold">{{ title }}</h4>
             <h5 v-if="title != originalTitle" class="text-warning">{{ originalTitle }}</h5>
-            <img 
-               :src="flag(language)"
-               :alt="`Lingua: ${language}`" 
-               />
-            <p>Voto: {{ vote }}</p>
+            <div>
+               <img :src="flag(language)" :alt="`Lingua: ${language}`" />
+            </div>
+            <div class="stars-outer d-inline-block position-relative fs-2">
+               <div class="stars-inner position-absolute overflow-hidden fs-2" :style="`width: ${votoStelle(vote)}%`"></div>
+            </div>
             <p>{{ overview }}</p>
          </div>
       </div>
@@ -71,7 +62,19 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/general.scss';
+.stars-outer:before {
+   content: "\2606 \2606 \2606 \2606 \2606";
+}
+.stars-inner {
+   top: 0;
+   left: 0;
+   white-space: nowrap;
 
+   &::before {
+      content: "\2605 \2605 \2605 \2605 \2605";
+      color: #f8ce0b;
+   }
+}
 .flip-card {
    width: 332px;
    height: 503px;

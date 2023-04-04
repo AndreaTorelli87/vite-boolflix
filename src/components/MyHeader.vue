@@ -17,11 +17,12 @@ export default {
 </script>
 
 <template>
-   <div class="bg-danger">
-      <div class="container p-5">
+   <div class="bg-black">
+      <div class="container p-3 d-flex justify-content-between">
+         <h1 class="text-danger fw-bold">BOOLFLIX</h1>
          <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Cerca..." aria-label="Cerca..." aria-describedby="button-addon2" v-model="store.input" @keyup.enter="$emit('cercaFilm')">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="$emit('cercaFilm')">Cerca</button>
+            <button class="btn btn-outline-light" type="button" id="button-addon2" @click="$emit('cercaFilm')">Cerca</button>
          </div>
       </div>
    </div>   
@@ -29,4 +30,8 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/general.scss';
+
+.input-group{
+   width: 20rem;
+}
 </style>

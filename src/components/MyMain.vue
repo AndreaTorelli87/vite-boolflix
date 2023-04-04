@@ -14,13 +14,6 @@ export default {
       return {
          store,
       }
-   },
-   computed: {
-      // cambioLingua() {
-      //    if (store.filmListApi.original_language == en) {
-      //       console.log(store.filmListApi)
-      //    }
-      // }
    }
 }
 
@@ -30,7 +23,7 @@ export default {
    <!-- CONTENITORE PER I FILM -->
    <div class="container">
       <div class="row">
-         <h1 class="text-center p-2" v-if="store.filmListApi.length == 0">Scegli un film</h1>
+         <h1 class="text-center text-white p-2" v-if="store.filmListApi.length == 0">Scegli un film</h1>
          <div class="col-3" v-for="(card, index) in store.filmListApi" :key="index">
             <CardFilm
                :image="card.poster_path"
@@ -41,13 +34,13 @@ export default {
                :overview="card.overview"
             />
          </div>
-         <h1 v-if="store.filmListApi == 0">Non è stato trovato nessun film</h1>
+         <!-- <h1 v-if="store.risultatoFilm">Non è stato trovato nessun film</h1> -->
       </div>
    </div>
    <!-- CONTENITORE PER LE SERIE TV -->
    <div class="container">
       <div class="row">
-         <h2>SERIE TV!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
+         <h1 v-if="store.filmListApi.length != 0" class="text-white text-center fw-bold py-4">SERIE TV!</h1>
          <div class="col-3" v-for="(card, index) in store.tvListApi" :key="index">
             <CardTv
                :image="card.poster_path"
@@ -58,7 +51,7 @@ export default {
                :overview="card.overview"
             />
          </div>
-         <h1 v-if="store.filmListApi == 0">Non è stata trovata nessuna serie tv</h1>
+         <!-- <h1 v-if="store.risultatoFilm">Non è stata trovata nessuna serie tv</h1> -->
       </div>
    </div>
 </template>
